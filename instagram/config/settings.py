@@ -26,6 +26,7 @@ SECRET_KEY = '#%$b2@o==++*lavk4(1)%w&t*3(d88)d^7e2^dm%cz%$!05q5w'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
 AUTH_USER_MODEL = 'members.User'
 
 # Application definition
