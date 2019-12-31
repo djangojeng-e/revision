@@ -6,7 +6,7 @@ from .models import PostComment, PostImage, Post, PostLike
 
 
 @admin.register(Post)
-class PostAdmin(admin.decorators):
+class PostAdmin(admin.ModelAdmin):
     pass
 
 
