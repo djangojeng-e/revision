@@ -19,12 +19,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 from config.views import index
+from members.views import login_view
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', index, name='index'),
-    path('members/', include('members.urls'))
+    path('login/', login_view, name='log_in'),
+
 ]
-
-urlpatterns += static(prefix=settings.MEDIA_URL, document_root=settings.MEDIA_ROOT,)
-
