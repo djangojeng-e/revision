@@ -21,6 +21,8 @@ from django.urls import path, include
 from config.views import index
 from members.views import login_view
 
+app_name = 'members'
+
 urlpatterns = [
     path('login/', login_view, name='log_in'),
 
