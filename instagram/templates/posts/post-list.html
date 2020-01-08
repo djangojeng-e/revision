@@ -21,8 +21,8 @@
     <div>글내용: {{ post.content }}</div>
     <div>
         {% for post_image in post.postimage_set.all %}
-        <div>{{ post_image.image.url }}</div>
-        <img src="{{ post_image.image.url }}">
+
+        <img src="{{ post_image.image.url }}" style="max-width: 200px;">
         {% endfor %}
     </div>
 
@@ -41,5 +41,29 @@
 
     </form>
     <hr>
+<div>
+    <ul>
+        {% for comment in post.postcomment_set.all %}
+
+            <li>
+                <b>{{ comment.author.name }}</b>
+                <span>{{ comment.content }}</span>
+            </li>
+
+        {% endfor %}
+
+
+    </ul>
+        <div>
+            <form action="{% url 'posts:comment-create' post_pk=post.pk %}" method="post">
+
+                {% csrf_token %}
+                <textarea name="content" cols="30" rows="3"></textarea>
+                <button type="submit">작성</button>
+
+            </form>
+
+        </div>
+    </div>
     {% endfor %}
 {% endblock %}

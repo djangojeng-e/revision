@@ -48,3 +48,14 @@ def post_create(request):
         }
         return render(request, 'posts/post-create.html', context)
 
+
+def comment_create(request, post_pk):
+    if request.method == "POST":
+        post = Post.objects.get(pk=post_pk)
+        content = request.POST['content']
+
+        post.postcomment_set.create(
+            author=request.user,
+            content=content,
+        )
+        return redirect('posts:post-list')
