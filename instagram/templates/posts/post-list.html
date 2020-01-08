@@ -7,6 +7,11 @@
     <div> User : {{ request.user }}</div>
     <div>Authenticated : {{ request.user.is_authenticated }}</div>
 
+    <div>
+        <a href="{% url 'members:logout' %}" class="btn btn-primary">로그아웃</a>
+    </div>
+
+
     {% for post in posts %}
     <div>{{ post.author }}</div>
     <div>{{ post.created }}</div>
