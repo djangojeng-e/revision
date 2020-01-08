@@ -18,21 +18,23 @@
 
             <form action="{% url 'members:signup' %}" method="POST">
                 {% csrf_token %}
-                <div class="form-group">
-                    <input type="email" name="email" class="form-control" placeholder="휴대폰 번호 또는 이메일 주소">
-                </div>
 
-                <div class="form-group">
-                    <input type="text" name="name" class="form-control" placeholder="성명">
-                </div>
+                {{ Signup_form }}
+<!--                <div class="form-group">-->
+<!--                    <input type="email" name="email" class="form-control" placeholder="휴대폰 번호 또는 이메일 주소">-->
+<!--                </div>-->
 
-                <div class="form-group">
-                    <input type="text" name="username" class="form-control" placeholder="사용자 이름">
-                </div>
+<!--                <div class="form-group">-->
+<!--                    <input type="text" name="name" class="form-control" placeholder="성명">-->
+<!--                </div>-->
 
-                <div class="form-group">
-                    <input type="password" name="password" class="form-control" placeholder="비밀번호">
-                </div>
+<!--                <div class="form-group">-->
+<!--                    <input type="text" name="username" class="form-control" placeholder="사용자 이름">-->
+<!--                </div>-->
+
+<!--                <div class="form-group">-->
+<!--                    <input type="password" name="password" class="form-control" placeholder="비밀번호">-->
+<!--                </div>-->
 
                 <button type="submit" class="btn btn-primary btn-block"> 가입 </button>
 
