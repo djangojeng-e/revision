@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from .models import Post, PostLike
-
+from .forms import PostCreateForm
 
 def post_list(request):
     posts = Post.objects.order_by('-pk')
@@ -28,9 +28,21 @@ def post_like(request, pk):
 
 def post_create(request):
 
+    if request.method == 'POST':
+        text = request.POST['text']
+        image = request.FILES['image']
 
-    context = {
+        post = Post.objects.create(
+            author=request.user,
+            content=text
+        )
+        post.postimage_set.create(image=image)
 
-    }
+        return redirect('posts:post-list')
+    else:
+        form = PostCreateForm()
+        context = {
+            'form': form,
+        }
+        return render(request, 'posts/post-create.html', context)
 
-    return render(request, 'posts/post-create.html', context)

@@ -2,5 +2,6 @@ from django import forms
 
 
 class PostCreateForm(forms.Form):
-    pass
+    image = forms.ImageField()
+    text = forms.CharField()
 

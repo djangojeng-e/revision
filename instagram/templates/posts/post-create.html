@@ -10,7 +10,8 @@
 
 <body>
 
-    <form action="">
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
         {{ form }}
         <button type="submit">작성</button>
     </form>
