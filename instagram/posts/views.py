@@ -2,12 +2,15 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from .models import Post, PostLike
-from .forms import PostCreateForm
+from .forms import PostCreateForm, CommentCreateForm
+
 
 def post_list(request):
     posts = Post.objects.order_by('-pk')
+    comment_form = CommentCreateForm()
     context = {
         'posts': posts,
+        'comment_form': comment_form
     }
     return render(request, 'posts/post-list.html', context)
 
@@ -52,10 +55,14 @@ def post_create(request):
 def comment_create(request, post_pk):
     if request.method == "POST":
         post = Post.objects.get(pk=post_pk)
-        content = request.POST['content']
+        # content = request.POST['content']
+        #
+        # post.postcomment_set.create(
+        #     author=request.user,
+        #     content=content,
+        # )
+        form = CommentCreateForm(data=request.POST)
+        if form.is_valid():
+            form.save(post=post, author=request.user)
 
-        post.postcomment_set.create(
-            author=request.user,
-            content=content,
-        )
         return redirect('posts:post-list')
