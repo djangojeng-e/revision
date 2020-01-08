@@ -4,7 +4,8 @@
 {% block content %}
 
 <h1>Post List</h1>
-
+    <div> User : {{ request.user }}</div>
+    <div>Authenticated : {{ request.user.is_authenticated }}</div>
 
     {% for post in posts %}
     <div>{{ post.author }}</div>
