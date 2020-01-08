@@ -11,6 +11,7 @@ def post_list(request):
     }
     return render(request, 'posts/post-list.html', context)
 
+
 def post_like(request, pk):
     post = Post.objects.get(pk=pk)
     user = request.user
@@ -23,3 +24,13 @@ def post_like(request, pk):
         PostLike.objects.create(post=post, user=user)
 
     return redirect('posts:post-list')
+
+
+def post_create(request):
+
+
+    context = {
+
+    }
+
+    return render(request, 'posts/post-create.html', context)
