@@ -16,14 +16,19 @@
     </div>
 
     {% for post in posts %}
-    <div>{{ post.author }}</div>
-    <div>{{ post.created }}</div>
-
-
-    {# <form action="{% url 'posts:post-like' pk=post.pk %}" method="POST"> #}
-    <div>작성자: {{ post.author }}</div>
-    <div>작성일시: {{ post.created }}</div>
+    <div>작성자 : {{ post.author }}</div>
+    <div>작성일시 : {{ post.created }}</div>
     <div>글내용: {{ post.content }}</div>
+    <div>
+        {% for post_image in post.postimage_set.all %}
+        <div>{{ post_image.image.url }}</div>
+        <img src="{{ post_image.image.url }}">
+        {% endfor %}
+    </div>
+
+
+
+
     <form action="{% url 'posts:post-like' pk=post.pk %}" method="POST">
         {% csrf_token %}
 
