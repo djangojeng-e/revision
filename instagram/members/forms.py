@@ -6,8 +6,22 @@ from members.models import User
 
 
 class LoginForm(forms.Form):
-    # 로그인 시 사용
-    pass
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': '아이디'
+            }
+        )
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': '비밀번호',
+            }
+        )
+    )
 
 
 class SignupForm(forms.Form):

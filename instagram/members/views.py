@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .forms import SignupForm
+from .forms import SignupForm, LoginForm
 User = get_user_model()
 # Create your views here.
 
@@ -17,7 +17,12 @@ def login_view(request):
             return redirect('posts:post-list')
         else:
             return redirect('members:login')
-    return render(request, 'members/login.html')
+    else:
+        form = LoginForm()
+        context = {
+            'form': form,
+        }
+        return render(request, 'members/login.html', context)
 
 
 def signup_view(request):
@@ -61,17 +66,9 @@ def signup_view(request):
     #     name=name,
     #
     # )
-
+        pass
 
 
 def logout_view(request):
-    """
-    GET요청으로 처리함
-    요청에 있는 사용자를 logout 처리
-    django.contrib.auth.logout 함수를 사용한다.
-    :param request:
-    :return:
-    """
-
     logout(request)
     return redirect('members:log_in')
