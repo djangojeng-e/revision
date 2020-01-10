@@ -22,7 +22,7 @@ def login_view(request):
 
 def signup_view(request):
     if request.method == "POST":
-        form = SignupForm(data=request.POST)
+
 
         if form.is_valid():
             email = request.POST['email']
@@ -37,7 +37,7 @@ def signup_view(request):
         else:
             form = SignupForm()
 
-        return render(request, 'members:login', {'form': form})
+        return render(request, 'members:login')
     # email = request.POST['email']
     # username = request.POST['username']
     # name = request.POST['name']

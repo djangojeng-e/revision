@@ -2,7 +2,7 @@ from django import forms
 from django.forms import PasswordInput
 from django.http import HttpResponse
 
-from members.models import User
+from .models import User
 
 
 class LoginForm(forms.Form):
