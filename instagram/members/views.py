@@ -22,16 +22,11 @@ def login_view(request):
 
 
 def signup_view(request):
-<<<<<<< HEAD
-    if request.method == "POST":
-
-=======
     '''
     Template : index.html 을 그대로 사용
     action만 이쪽으로
     URL : /members/signup/
     FORM : members.forms.SignupForm
->>>>>>> 2f886f306fc25abcfa4575978f82a693b0cd4a55
 
     User에 name필드를 추가
     email
@@ -48,30 +43,24 @@ def signup_view(request):
     :param request:
     :return:
     '''
-    if request.method == "POST":
+    email = request.POST['email']
+    username = request.POST['username']
+    name = request.POST['name']
+    password = request.POST['password']
 
-<<<<<<< HEAD
-        return render(request, 'members:login')
-=======
->>>>>>> 2f886f306fc25abcfa4575978f82a693b0cd4a55
-    # email = request.POST['email']
-    # username = request.POST['username']
-    # name = request.POST['name']
-    # password = request.POST['password']
-    #
-    # if User.objects.filter(username=username).exists():
-    #     return HttpResponse('이미 사용중인 username 입니다')
-    # if User.objects.filter(email=email).exists():
-    #     return HttpResponse('이미 사용중인 email입니다.')
-    #
-    # user = User.objects.create_user(
-    #     password=password,
-    #     username=username,
-    #     email=email,
-    #     name=name,
-    #
-    # )
-        pass
+    if User.objects.filter(username=username).exists():
+        return HttpResponse('이미 사용중인 username입니다')
+    if User.objects.filter(email=email).exists():
+        return HttpResponse('이미 사용중인 email입니다')
+
+    user = User.objects.create_user(
+        password=password,
+        username=username,
+        email=email,
+        name=name,
+    )
+    login(request, user)
+    return redirect('posts:post-list')
 
 
 def logout_view(request):
