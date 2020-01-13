@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import SignupForm, LoginForm
+
 User = get_user_model()
 # Create your views here.
 
@@ -45,24 +46,19 @@ def signup_view(request):
     :param request:
     :return:
     '''
-    email = request.POST['email']
-    username = request.POST['username']
-    name = request.POST['name']
-    password = request.POST['password']
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('posts:post-list')
+    else:
+        form = SignupForm()
 
-    if User.objects.filter(username=username).exists():
-        return HttpResponse('이미 사용중인 username입니다')
-    if User.objects.filter(email=email).exists():
-        return HttpResponse('이미 사용중인 email입니다')
+    context = {
+        'form': form,
+    }
 
-    user = User.objects.create_user(
-        password=password,
-        username=username,
-        email=email,
-        name=name,
-    )
-    login(request, user)
-    return redirect('posts:post-list')
+    return render(request, 'members/signup.html', context)
 
 
 def logout_view(request):

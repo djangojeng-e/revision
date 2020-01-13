@@ -44,10 +44,47 @@ class LoginForm(forms.Form):
 
 
 class SignupForm(forms.Form):
-    email = forms.EmailField()
-    name = forms.CharField()
-    username = forms.CharField()
-    password = forms.CharField(max_length=12, widget=PasswordInput, required=True)
+    email = forms.EmailField(
+        widget=forms.EmailInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': '이메일',
+            }
+        )
+    )
+
+    name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': '이름',
+            }
+        )
+    )
+
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'username'
+            }
+        )
+    )
+
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': '패스워드',
+            }
+        )
+    )
+    def clean(self):
+        pass
+    # email = forms.EmailField()
+    # name = forms.CharField()
+    # username = forms.CharField()
+    # password = forms.CharField(max_length=12, widget=PasswordInput, required=True)
 
     def save(self, email, name, username, password):
         """
